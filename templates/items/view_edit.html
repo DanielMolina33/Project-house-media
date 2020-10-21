@@ -1,0 +1,61 @@
+{% extends 'items/base.html' %}
+
+{% block head_content %}
+    <title>Edit</title>
+{% endblock %}
+
+{% block navbar %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5 pl-5 pr-5">
+        <a class="navbar-brand font-5 m-0" href="{% url 'items' %}">{{request.user.username}} | <span class="h5">Edit</span></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav w-100 d-flex justify-content-end">
+            <a href="{% url 'seller_my_items' %}" class="nav-item nav-link">My panel</a>
+            <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+        </div>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block container %}
+<div class="row h-100 justify-content-center align-items-center">
+    <div class="col-sm-12 col-md-6 mb-5">
+        <form method="POST" action="{% url 'seller_edit' id %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form.non_field_errors}}
+            {% if error %}<p class="alert alert-danger">{{error}}</p>{% endif %}
+            <div class="form-group">
+                <label for="{{form.title.id_for_label}}">Title</label>
+                {{form.title}}
+            </div>
+            <div class="form-group h-25">
+                <label for="{{form.description.id_for_label}}">Description</label>
+                {{form.description}}
+            </div>
+            <div class="form-group">
+                <label for="{{form.price.id_for_label}}">Price</label>
+                {{form.price}}
+            </div>
+            <div class="form-group">
+                <label for="{{form.tags.id_for_label}}">Tags</label>
+                {{form.tags}}
+                <small id="tagsHelp" class="form-text text-muted">Separate by commas</small>
+            </div>
+            <div class="form-group">
+                <label for="{{form.classification.id_for_label}}">Classification</label>
+                {{form.classification}}
+                <small id="classificationHelp" class="form-text text-muted">PEGI or others</small>
+            </div>
+            <div class="form-group">
+                <div class="custom-file">
+                    {{form.picture}}
+                    <label class="custom-file-label" for="{{form.picture.id_for_label}}">Choose file</label>
+                </div>
+            </div>
+            <input type="submit" value="Update" class="btn btn-block btn-primary"/>
+        </form>
+    </div>
+</div>
+{% endblock %}

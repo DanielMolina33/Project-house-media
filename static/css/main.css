@@ -1,0 +1,25 @@
+html, body {
+    height: 100%; width: 100%;
+}
+
+.label-text-sm {
+    font-size: 14px;
+}
+
+.container-img {
+    width: 100% !important;
+    height: 150px !important;
+}
+
+img {
+    width: 100%;
+    object-fit: cover;
+}
+
+.font-5 {
+    font-size: 2rem !important;
+}
+
+.errorlist {
+    display: none !important;
+}
