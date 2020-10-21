@@ -12,6 +12,16 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import cloudinary
+import environ
+
+env = environ.Env(
+    CLOUD_NAME=(str),
+    API_KEY=(str),
+    API_KEY_SECRET=(str),
+    SECRET_KEY=(str),
+)
+
+environ.Env.read_env('.env')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,7 +31,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'ij8zxb(^)gv=5uemsjhqe4)m!1b00o6%h-t%#41_=ylk_e2aw-'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -144,7 +154,7 @@ ROLEPERMISSIONS_SUPERUSER_SUPERPOWERS = False
 
 # Use environment variables
 cloudinary.config(
-  cloud_name = "dxbc8w034" ,
-  api_key = "135853562581645" ,
-  api_secret = "mAg0nxf_QeXkdieSSDeb_sIzpIs"
+  cloud_name = env('CLOUD_NAME'),
+  api_key = env('API_KEY'),
+  api_secret = env('API_KEY_SECRET')
 )
